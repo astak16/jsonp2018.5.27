@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>首页</title>
+</head>
+<body>
+	<h5>余额<span id="amount">&&&amount&&&</span></h5>
+	<button id="button">付款</button>
+<script>
+	let functionName = parseInt(Math.random()*1000000)
+		window[functionName] = function (result){
+			if(result === 'success'){
+				amount.innerText = amount.innerText - 1
+			}
+		}
+	button.addEventListener('click',function(){
+		var script = document.createElement('script')
+		
+		
+		script.src = 'http://frank.com:8001/pay?callback=' + functionName
+		debugger
+		document.body.appendChild(script)
+		script.onload = function(e){
+			e.currentTarget.remove()
+			delete window[functionName]
+		}
+		script.onerror = function(e){
+			alert("false")
+			e.currentTarget.remove()
+			delete window[functionName]
+		}
+	})
+</script>
+</body>
+</html>
